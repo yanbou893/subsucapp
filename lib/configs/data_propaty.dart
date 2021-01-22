@@ -3,6 +3,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// void funk(context)(
+//   int size = MediaQuery.of(context).size;
+// ),
+
 class DataProrty extends State<StatefulWidget> {
   @override
   Widget build(BuildContext context) {

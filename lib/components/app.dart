@@ -5,6 +5,7 @@ import 'package:subsucapp/repositories/subsuc_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'subsuc_list/subsuc_list_view.dart';
+import 'subsuc_edit/subsuc_edit_view.dart';
 
 class SubApp extends StatelessWidget {
   @override
@@ -12,13 +13,14 @@ class SubApp extends StatelessWidget {
     return MaterialApp(
       title: ConstText.appTitle,
       // ダークモード対応
-      darkTheme: ThemeData(
+      theme: ThemeData(
           brightness: Brightness.dark
       ),
-      home: ChangeNotifierProvider(
-          create: (context) => Subsuc(),
-          child: SubsucListView()
-      ),
+      initialRoute: SubsucListView.id,
+      routes: {
+        SubsucListView.id: (context) => SubsucListView(),
+        SubsucEditView.id: (context) => SubsucEditView(),
+      },
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 // import 'package:simple_todo_app/models/todo.dart';
 // import 'package:simple_todo_app/repositories/todo_bloc.dart';
 import 'package:subsucapp/repositories/subsuc_provider.dart';
+import 'package:subsucapp/components/subsuc_edit/subsuc_edit_view.dart';
 import 'package:subsucapp/configs/const_text.dart';
 
 
@@ -17,6 +18,7 @@ class TabInfo {
 }
 
 class SubsucListView extends StatelessWidget {
+  static String id = 'subsuc_screen';
   final List<Tab> _tabs = [
     Tab(text: "SAN CLEMENTE"),
     Tab(text: "SAN CLEMENTE"),
@@ -61,18 +63,10 @@ class SubsucListView extends StatelessWidget {
           padding: const EdgeInsets.all(30.0),
             child: Column(
               children: <Widget>[
-           Container(
-              decoration: BoxDecoration(color: Colors.black),
-              width: size.width,
-              height: heightA,
-              padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
-              child: Text(
-                '¥ '+"$count",
-                textAlign: TextAlign.center,
-                style: TextStyle(height: 1, fontSize: 45,fontWeight: FontWeight.bold,color: Colors.white),
-
-              ),
-            ),
+                _titleTextFormField(count,size,heightA),
+                _sortField(count,widthC,heightC),
+                _listField(count,size,heightD),
+                _actionButton(context),
               // _noteTextFormField(),
               // // Container(
               // //   child:Row(
@@ -89,32 +83,73 @@ class SubsucListView extends StatelessWidget {
             ],
           ),
         ),
-      floatingActionButton:Container(
-        // margin:EdgeInsets.only(bottom: 70.0),
-        child:FloatingActionButton(
-          onPressed:(){ _moveToCreateView(context, _bloc); },
-          child: Icon(Icons.add, size: 40),
-        ),
-      ),
+      // floatingActionButton:Container(
+      //   // margin:EdgeInsets.only(bottom: 70.0),
+      //   child:FloatingActionButton(
+      //     onPressed:(){ _moveToCreateView(context, _bloc); },
+      //     child: Icon(Icons.add, size: 40),
+      //   ]),
+      // ),
     );
   }
 
-  // Widget _titleTextFormField() => Container(
-  //   decoration: BoxDecoration(color: Colors.black),
-  //   width: size.width,
-  //   height: heightA,
-  //   padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
-  //   child: Text(
-  //     '¥ '+"$count",
-  //     textAlign: TextAlign.center,
-  //     style: TextStyle(height: 1, fontSize: 45,fontWeight: FontWeight.bold,color: Colors.white),
-  //
-  //   ),
-  // );
+  Widget _titleTextFormField(count,size,heightA) => Container(
+    decoration: BoxDecoration(color: Colors.black),
+    width: size.width,
+    height: heightA,
+    padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+    child: Text(
+      '¥ '+"$count",
+      textAlign: TextAlign.center,
+      style: TextStyle(height: 1, fontSize: 45,fontWeight: FontWeight.bold,color: Colors.white),
 
-  _moveToCreateView(BuildContext context, TodoBloc bloc) => Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => TodoEditView(todoBloc: bloc, todo: Subsuc.newTodo()))
+    ),
   );
 
+
+  Widget _sortField(count,widthC,heightC) => Container(
+    decoration: BoxDecoration(color: Colors.black),
+    width: widthC,
+    height: heightC,
+    padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+    child: Text(
+      '¥ '+"$count",
+      textAlign: TextAlign.center,
+      style: TextStyle(height: 1, fontSize: 45,fontWeight: FontWeight.bold,color: Colors.white),
+
+    ),
+  );
+
+
+  Widget _listField(count,size,heightD) => Container(
+    decoration: BoxDecoration(color: Colors.black),
+    width: size.width,
+    height: heightD,
+    padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+    child: Text(
+      '¥ '+"$count",
+      textAlign: TextAlign.center,
+      style: TextStyle(height: 1, fontSize: 45,fontWeight: FontWeight.bold,color: Colors.white),
+
+    ),
+  );
+
+
+  Widget _actionButton(context) => Container(
+    // margin:EdgeInsets.only(bottom: 70.0),
+    child:FloatingActionButton(
+      onPressed:(){ _moveToCreateView(context); },
+      child: Icon(Icons.add, size: 40),
+    ),
+  );
+
+  // _moveToCreateView(BuildContext context, TodoBloc bloc) => Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => TodoEditView(todoBloc: bloc, todo: Subsuc.newTodo()))
+  // );
+
+  _moveToCreateView(BuildContext context) => Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SubsucEditView(Subsuc))
+  );
 }
