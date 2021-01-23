@@ -4,8 +4,8 @@ import 'package:subsucapp/configs/const_text.dart';
 import 'package:subsucapp/repositories/subsuc_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'subsuc_list/subsuc_list_view.dart';
-import 'subsuc_edit/subsuc_edit_view.dart';
+import 'subsuc_screen.dart';
+import 'subsuc_edit_screen.dart';
 
 class SubApp extends StatelessWidget {
   @override
@@ -16,10 +16,10 @@ class SubApp extends StatelessWidget {
       theme: ThemeData(
           brightness: Brightness.dark
       ),
-      initialRoute: SubsucListView.id,
+      initialRoute: SubsucListScreen.id,
       routes: {
-        SubsucListView.id: (context) => SubsucListView(),
-        SubsucEditView.id: (context) => SubsucEditView(),
+        SubsucListScreen.id: (context) => SubsucListScreen(),
+        SubsucEditScreen.id: (context) => SubsucEditScreen(),
       },
     );
   }
