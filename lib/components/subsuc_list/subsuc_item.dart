@@ -4,13 +4,14 @@ import 'package:subsucapp/repositories/subsuc_provider.dart';
 class SubsucItem extends StatelessWidget {
   final Subsuc item;
   final VoidCallback onTap;
-  final Function(bool) toggleDone;
+  // final Function(bool) toggleDone;
 
   const SubsucItem(
       {Key key,
         @required this.onTap,
         @required this.item,
-        @required this.toggleDone})
+        // @required this.toggleDone
+      })
       : super(key: key);
 
   @override
@@ -29,6 +30,20 @@ class SubsucItem extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     item.name,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    (item.amount).toString(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    ((item.startDate).toString()).substring(0,10),
                     style: Theme.of(context)
                         .textTheme
                         .headline

@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subsucapp/components/subsuc_edit/subsuc_amount_field.dart';
+import 'package:subsucapp/components/subsuc_edit/subsuc_billing_period.dart';
 import 'package:subsucapp/components/subsuc_edit/subsuc_name_field.dart';
+import 'package:subsucapp/components/subsuc_edit/subsuc_start_date.dart';
 import 'package:subsucapp/repositories/subsuc_list_model.dart';
 import 'package:subsucapp/repositories/subsuc_provider.dart';
 
@@ -57,12 +59,31 @@ class SubsucEditScreen extends StatelessWidget {
                   context,
                   title: 'Amount',
                   textEditingController: viewModel.amountController,
+                  // didChanged: (value) {
+                  //   // viewModel.updateValidateAmount(value);
+                  // },
+                ),
+                SubsucStartDate(
+                  context,
+                  title: 'StartDate',
+                  textEditingController: viewModel.startDateController,
+                  // didChanged: (value) {
+                  //   // viewModel.updateValidateAmount(value);
+                  // },
+                ),
+                SubsucBillingPeriod(
+                  context,
+                  title: 'BillingPeriod',
+                  textEditingController: viewModel.billingTextController,
+                  periodEditingController: viewModel.billingPeriodController,
+                  // billingtext:Subsuc.billingtext
                   didChanged: (value) {
-                    viewModel.updateValidateAmount(value);
+                    viewModel.updateValidateBillingText(value);
                   },
                 ),
 
                 _buildAddButton(context),
+                // _buildDeleteButton(context),
               ],
             ),
           ),
@@ -83,6 +104,13 @@ class SubsucEditScreen extends StatelessWidget {
       Navigator.of(context).pop();
     }
   }
+
+  void tapDeleteButton(BuildContext context) {
+    final viewModel = Provider.of<SubsucListModel>(context, listen: false);
+    viewModel.setValidateName(true);
+    viewModel.deleteSubsuc(editSubsuc.id);
+      Navigator.of(context).pop();
+    }
 
   // Widget _buildInputField(BuildContext context,
   //     {String title,
@@ -120,6 +148,23 @@ class SubsucEditScreen extends StatelessWidget {
         child: Center(
           child: Text(
             _isEdit() ? 'Save' : 'Add',
+            style:
+            Theme.of(context).textTheme.title.copyWith(color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _buildDeleteButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: RaisedButton(
+        onPressed: () => tapDeleteButton(context),
+        color: Theme.of(context).primaryColor,
+        padding: const EdgeInsets.all(20),
+        child: Center(
+          child: Text(
+            'Delete',
             style:
             Theme.of(context).textTheme.title.copyWith(color: Colors.white),
           ),

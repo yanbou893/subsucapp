@@ -6,15 +6,11 @@ class SubsucAmountField extends StatelessWidget {
 
   final String title;
   final TextEditingController textEditingController;
-  final String errorText;
-  final Function(String) didChanged;
 
   const SubsucAmountField(BuildContext context,
       {Key key,
         @required this.title,
         @required this.textEditingController,
-        @required this.errorText,
-        @required this.didChanged,
       }) : super(key: key);
 
   @override
@@ -30,11 +26,7 @@ class SubsucAmountField extends StatelessWidget {
           ),
           TextField(
             controller: textEditingController,
-            decoration: InputDecoration(errorText: errorText),
             keyboardType: TextInputType.number,
-            onChanged: (value) {
-              didChanged(value);
-            },
           ),
         ],
       ),

@@ -29,6 +29,7 @@ class SubsucNameField extends StatelessWidget {
             style: Theme.of(context).textTheme.subtitle,
           ),
           TextField(
+            // initialValue: _strValidateName,
             controller: textEditingController,
             decoration: InputDecoration(errorText: errorText),
             onChanged: (value) {

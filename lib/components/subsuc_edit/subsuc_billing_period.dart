@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subsucapp/repositories/subsuc_list_model.dart';
+import 'package:subsucapp/repositories/subsuc_provider.dart';
 
-class SubsucNameField extends StatelessWidget {
+class SubsucBillingPeriod extends StatelessWidget {
 
   final String title;
   final TextEditingController textEditingController;
-  final String errorText;
+  final TextEditingController periodEditingController;
+
   final Function(String) didChanged;
 
-  const SubsucNameField(BuildContext context,
+  const SubsucBillingPeriod(BuildContext context,
       {Key key,
         @required this.title,
         @required this.textEditingController,
-        @required this.errorText,
+        @required this.periodEditingController,
         @required this.didChanged,
       }) : super(key: key);
 
@@ -24,16 +26,37 @@ class SubsucNameField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: Theme.of(context).textTheme.subtitle,
-          ),
-          TextField(
-            controller: textEditingController,
-            decoration: InputDecoration(errorText: errorText),
+          RadioListTile(
+            activeColor: Colors.blue,
+            title:  Text('Monthly'),
+            value: 'Monthly',
+            groupValue: textEditingController.text,
             onChanged: (value) {
               didChanged(value);
             },
+          ),
+          RadioListTile(
+            activeColor: Colors.blue,
+            title:  Text('Yearly'),
+            value: 'Yearly',
+            groupValue: textEditingController.text,
+            onChanged: (value) {
+              didChanged(value);
+            },
+          ),
+          RadioListTile(
+            activeColor: Colors.blue,
+            title:  Text('Own'),
+            value: 'Own',
+            groupValue: textEditingController.text,
+            onChanged: (value) {
+              didChanged(value);
+            },
+          ),
+          TextField(
+            enabled:textEditingController.text == 'Own'? true : false,
+            controller: periodEditingController,
+            keyboardType: TextInputType.number,
           ),
         ],
       ),

@@ -22,7 +22,7 @@ class DBProvider {
     _database = await initDB();
     return _database;
   }
-
+  //
   Future<Database> initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
 
@@ -32,7 +32,7 @@ class DBProvider {
 
     return await openDatabase(path, version: 1, onCreate: _createTable);
   }
-
+  //
   Future<void> _createTable(Database db, int version) async {
 
     // sqliteではDate型は直接保存できないため、文字列形式で保存する
@@ -41,10 +41,10 @@ class DBProvider {
             "id TEXT PRIMARY KEY,"
             "name TEXT,"
             "amount INTEGER,"
-            "billingPeriod INTEGER,"
             "billingtext TEXT,"
+            "billingPeriod INTEGER,"
             "startDate TEXT,"
-            "subsuc INTEGER"
+            "pay TEXT"
             ")"
     );
   }
@@ -63,13 +63,13 @@ class DBProvider {
     return list;
   }
 
-  updateSubsuc(Subsuc todo) async {
+  updateSubsuc(Subsuc subsuc) async {
     final db = await database;
     var res  = await db.update(
         _tableName,
-        todo.toMap(),
+        subsuc.toMap(),
         where: "id = ?",
-        whereArgs: [todo.id]
+        whereArgs: [subsuc.id]
     );
     return res;
   }
@@ -84,4 +84,11 @@ class DBProvider {
     return res;
   }
 
+  deleteDB() async {
+    final db = await database;
+    var res = db.delete(
+        _tableName
+    );
+    return res;
+  }
 }

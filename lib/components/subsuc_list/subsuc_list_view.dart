@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'file:///C:/Users/893ya/AndroidStudioProjects/subsucapp/lib/components/subsuc_edit_screen.dart';
 import 'package:subsucapp/components/subsuc_list/subsuc_item.dart';
 import 'package:subsucapp/repositories/subsuc_list_model.dart';
+import 'package:subsucapp/repositories/subsuc_provider.dart';
 
 class SubsucListView extends StatelessWidget {
 
@@ -17,6 +18,7 @@ class SubsucListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<SubsucListModel>(builder: (context, subsucModel, _){
+
       // if (subsucModel.subsucs.isEmpty) {
       //   return _emptyView();
       // }
@@ -25,38 +27,54 @@ class SubsucListView extends StatelessWidget {
           width: size.width,
           height: height,
           padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+          // child:Provider<SubsucListModel>.value(
+            // value: ,
           child:  ListView.separated(
-          itemBuilder: (context, index) {
+              itemCount: subsucModel.subsucs.length,
+              separatorBuilder: (_, __) => Divider(),
+              itemBuilder: (context, index) {
             var item = subsucModel.subsucs[index];
-            return Dismissible(
-              key: UniqueKey(),
-              onDismissed: (direction) {
-                if (direction == DismissDirection.endToStart) {
-                  subsucModel.deleteSubsuc(index);
-                }
-              },
-              background: _buildDismissibleBackgroundContainer(false),
-              secondaryBackground: _buildDismissibleBackgroundContainer(true),
+            return Card(
+              // Dismissible(
+              // key: Key(item.id),
+            //   onDismissed: (direction) {
+            //       subsucModel.deleteSubsuc(item.id);
+            //     },
+            //     // else {
+            //     //   subsucModel.toggleDone(index, true);
+            //     // }
+            //   background: _buildDismissibleBackgroundContainer(false),
+            //   secondaryBackground: _buildDismissibleBackgroundContainer(true),
               child: SubsucItem(
                 item: item,
                 onTap: () {
-                  Navigator.of(context).push<dynamic>(
-                    MaterialPageRoute<dynamic>(builder: (context) {
-                      // var subsucs = subsucModel.subsucs[index];
-                      subsucModel.nameController.text = item.name;
-                      // subsucModel.memoController.text = task.memo;
-                      return SubsucEditScreen(editSubsuc: item);
-                    }),
-                  );
+
+                  subsucModel.nameController.text = item.name;
+                  subsucModel.amountController.text = (item.amount).toString();
+                  subsucModel.startDateController.text = (item.startDate).toString().substring(0,10);
+                  subsucModel.billingTextController.text = (item.billingtext).toString();
+                  subsucModel.billingPeriodController.text = (item.billingPeriod).toString();
+                  _moveToEditView(context, item);
+
+                  // Navigator.of(context).push<dynamic>(
+                  //   MaterialPageRoute<dynamic>(builder: (context) {
+                  //     var subsucs = subsucModel.subsucs[index];
+                  //     subsucModel.nameController.text = item.name;
+                  //     // subsucModel.memoController.text = task.memo;
+                  //     return SubsucEditScreen(editSubsuc: item);
+                  //   }
+                  //   ),
+                  // );
                 },
                 // toggleDone: (value) {
                 //   subsucModel.toggleDone(index, value);
                 // },
-              ),
-            );
+              ),);
+            // );
           },
-          separatorBuilder: (_, __) => Divider(),
-          itemCount: subsucModel.subsucs.length)
+          // separatorBuilder: (_, __) => Divider(),)
+      )
+          // )
       );
     });
 
@@ -96,4 +114,10 @@ class SubsucListView extends StatelessWidget {
       ),
     );
   }
+
+
+  _moveToEditView(BuildContext context,  Subsuc item) => Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SubsucEditScreen(editSubsuc: item))
+  );
 }

@@ -39,7 +39,24 @@ class SubsucListScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.black,
         drawerEdgeDragWidth: 0, //　ボタンのみでドロワーを開ける様にする(スワイプでドロワーを開けるエリアを0にする）
-        endDrawer: SizedBox(width: widthD, child: Drawer()),
+        endDrawer: SizedBox(width: widthD, child: Drawer(
+          child:Container(
+
+      //     children: <Widget>[
+      //   DrawerHeader(
+      //   child: Text(
+      //     'My App',
+      //     style: TextStyle(
+      //       fontSize: 24,
+      //       color: Colors.white,
+      //     ),
+      //   ),
+      //     decoration: BoxDecoration(
+      //       color: Colors.blue,
+      //     ),
+      //   ),
+      // ]
+          ))),
         appBar: AppBar(
             backgroundColor: Colors.black,
             centerTitle: true,

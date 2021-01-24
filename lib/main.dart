@@ -16,9 +16,9 @@ void main() {
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => SubsucListModel()),
-          // ChangeNotifierProvider(create: (context) => SubsucAmountModel()),
-          // ChangeNotifierProvider(create: (context) => SubsucSortModel()),
-          // ChangeNotifierProvider(create: (context) => SubsucTabModel()),
+          ChangeNotifierProvider(create: (context) => SubsucAmountModel()),
+          ChangeNotifierProvider(create: (context) => SubsucSortModel()),
+          ChangeNotifierProvider(create: (context) => SubsucTabModel()),
           Provider(create: (context) => Subsuc()),
         ],
     // ChangeNotifierProvider(
