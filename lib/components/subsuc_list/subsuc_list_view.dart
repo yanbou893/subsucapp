@@ -34,17 +34,19 @@ class SubsucListView extends StatelessWidget {
               separatorBuilder: (_, __) => Divider(),
               itemBuilder: (context, index) {
             var item = subsucModel.subsucs[index];
-            return Card(
+            return
+
               // Dismissible(
               // key: Key(item.id),
-            //   onDismissed: (direction) {
-            //       subsucModel.deleteSubsuc(item.id);
-            //     },
-            //     // else {
-            //     //   subsucModel.toggleDone(index, true);
-            //     // }
-            //   background: _buildDismissibleBackgroundContainer(false),
-            //   secondaryBackground: _buildDismissibleBackgroundContainer(true),
+              //   onDismissed: (direction) {
+              //       subsucModel.deleteSubsuc(item.id);
+              //     },
+              //     // else {
+              //     //   subsucModel.toggleDone(index, true);
+              //     // }
+              //   background: _buildDismissibleBackgroundContainer(false),
+              //   secondaryBackground: _buildDismissibleBackgroundContainer(true),
+                Card(
               child: SubsucItem(
                 item: item,
                 onTap: () {

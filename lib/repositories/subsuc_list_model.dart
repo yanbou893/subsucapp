@@ -123,6 +123,11 @@ class SubsucListModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void allClear(){
+    DBProvider.db.deleteDB();
+    notifyListeners();
+  }
+
   // getSubsucs() async {
   //   await DBProvider.db.getAllSubsuc();
   // }

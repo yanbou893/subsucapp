@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:subsucapp/components/subsuc_list/subsuc_amount_view.dart';
 import 'package:subsucapp/components/subsuc_list/subsuc_list_view.dart';
 import 'package:subsucapp/components/subsuc_list/subsuc_sort_view.dart';
+import 'package:subsucapp/repositories/subsuc_list_model.dart';
 import 'package:subsucapp/repositories/subsuc_provider.dart';
 import 'file:///C:/Users/893ya/AndroidStudioProjects/subsucapp/lib/components/subsuc_edit_screen.dart';
 import 'package:subsucapp/configs/const_text.dart';
@@ -14,6 +15,8 @@ class SubsucListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final model = Provider.of<SubsucListModel>(context, listen: false);
 
     final size = MediaQuery.of(context).size;
     final padding = MediaQuery.of(context).padding;
@@ -41,7 +44,16 @@ class SubsucListScreen extends StatelessWidget {
         drawerEdgeDragWidth: 0, //　ボタンのみでドロワーを開ける様にする(スワイプでドロワーを開けるエリアを0にする）
         endDrawer: SizedBox(width: widthD, child: Drawer(
           child:Container(
-
+          child: Column(
+            children: <Widget>[
+              RaisedButton(
+                child: Text('All Delete'),
+                onPressed: () {
+                  model.allClear();
+                },
+              )
+            ],
+          )
       //     children: <Widget>[
       //   DrawerHeader(
       //   child: Text(
@@ -87,6 +99,9 @@ class SubsucListScreen extends StatelessWidget {
     );
   }
 
+  // void _deleteDB(){
+  //   model.allClear();
+  // }
 
 
   // Widget _amountField(size,height) => Container(
