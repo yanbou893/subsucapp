@@ -19,8 +19,26 @@ class SubsucListModel extends ChangeNotifier {
   TextEditingController startDateController = TextEditingController();
   TextEditingController billingTextController = TextEditingController();
   TextEditingController billingPeriodController = TextEditingController();
+  TabController tabbarController = TabController(length: 2);
   // final _subsucController = LisController<List<Subsuc>>();
+  List<Tab> tabs = <Tab>[
+    Tab(
+      text: "Monthly",
+    ),
+    Tab(
+      text: "Yearly",
+    )
+  ];
 
+  List<Tab> get listTab => tabs;
+
+  // TabBarView tabContents = [
+  //   TabPage(title: 'Car', icon: Icons.directions_car),
+  //   TabPage(title: 'Bicycle', icon: Icons.directions_bike),
+  //   TabPage(title: 'Boat', icon: Icons.directions_boat),
+  // ];
+  // List<Tab> get listTab => tabs;
+  // List<Tab> get listTabContents => tabContents;
   String _strValidateName = '';
   String get strValidateName => _strValidateName;
   int _intValidateAmount = 0;
@@ -127,6 +145,7 @@ class SubsucListModel extends ChangeNotifier {
     DBProvider.db.deleteDB();
     notifyListeners();
   }
+
 
   // getSubsucs() async {
   //   await DBProvider.db.getAllSubsuc();

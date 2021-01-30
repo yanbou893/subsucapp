@@ -33,8 +33,16 @@ class Subsuc {
       );
 
 
+  static List<Tab> tabs = <Tab>[
+    Tab(
+      text: "Monthly",
+    ),
+    Tab(
+      text: "Yearly",
+    )
+  ];
 
-
+  List<Tab> get listTab => tabs;
 
   // newTodo() {
   //   name = "";

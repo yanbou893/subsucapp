@@ -12,7 +12,6 @@ import 'package:subsucapp/configs/const_text.dart';
 
 class SubsucListScreen extends StatelessWidget {
   static String id = 'subsuc_screen';
-
   @override
   Widget build(BuildContext context) {
 
@@ -39,7 +38,13 @@ class SubsucListScreen extends StatelessWidget {
     final heightD = maxHeight * (65 / 100);
     final widthD = size.width * (50 / 100);
 
-    return Scaffold(
+    final List<TabInfo> _tabs = [
+      TabInfo("Monthly", SubsucAmountView(size:size,height:heightA)),
+      TabInfo("Yearly", SubsucAmountView(size:size,height:heightA)),
+    ];
+    return DefaultTabController(
+        length: _tabs.length,
+        child: Scaffold(
         backgroundColor: Colors.black,
         drawerEdgeDragWidth: 0, //　ボタンのみでドロワーを開ける様にする(スワイプでドロワーを開けるエリアを0にする）
         endDrawer: SizedBox(width: widthD, child: Drawer(
@@ -73,17 +78,25 @@ class SubsucListScreen extends StatelessWidget {
             backgroundColor: Colors.black,
             centerTitle: true,
             elevation: 0.0,
+            bottom: TabBar(
+              isScrollable: true,
+              tabs: _tabs.map((TabInfo tab) {
+              return Tab(text: tab.label);
+              }).toList(),
+              ),
+        ),
             // bottom: TabBar(tabs: _tabs,)
-          ),
+
         body: Container(
           padding: const EdgeInsets.all(30.0),
             child: Column(
               children: <Widget>[
+                TabBarView(children: _tabs.map((tab) => tab.widget).toList()),
                 // _amountField(size,heightA)
                 // SubsucAmountView(),
                 // SubsucSortView(),
                 // SubsucListScreen(),
-                SubsucAmountView(size:size,height:heightA),
+                // SubsucAmountView(size:size,height:heightA),
                 SubsucSortView(size:widthC,height:heightC),
                 SubsucListView(size:size,height:heightD),
             ],
@@ -96,6 +109,7 @@ class SubsucListScreen extends StatelessWidget {
           child: Icon(Icons.add, size: 40),
         ),
       ),
+        ),
     );
   }
 
@@ -157,8 +171,20 @@ class SubsucListScreen extends StatelessWidget {
   //     MaterialPageRoute(builder: (context) => TodoEditView(todoBloc: bloc, todo: Subsuc.newTodo()))
   // );
 
+  Widget _createTab(Tab tab){
+    return Center(
+      child: Text("10 min Rest Time" , style: TextStyle(
+          fontSize: 24.0
+      ),),
+    );
+  }
   _moveToCreateView(BuildContext context) => Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SubsucEditScreen())
   );
+}
+class TabInfo {
+  String label;
+  Widget widget;
+  TabInfo(this.label, this.widget);
 }
